@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2016-11-12T20:23:57 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Report 2 - Table" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bc5eeba5-b1c4-4e5f-956c-356c856aa4b4">
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="productid" class="java.lang.Integer">
+		<fieldDescription><![CDATA[productid]]></fieldDescription>
+	</field>
+	<field name="quantityperunit" class="java.lang.String">
+		<fieldDescription><![CDATA[quantityperunit]]></fieldDescription>
+	</field>
+	<field name="reorderlevel" class="java.lang.Short">
+		<fieldDescription><![CDATA[reorderlevel]]></fieldDescription>
+	</field>
+	<field name="supplier" class="com.company.jasperreportsdemo.entities.Supplier">
+		<fieldDescription><![CDATA[supplier]]></fieldDescription>
+	</field>
+	<field name="unitsonorder" class="java.lang.Short">
+		<fieldDescription><![CDATA[unitsonorder]]></fieldDescription>
+	</field>
+	<field name="productname" class="java.lang.String">
+		<fieldDescription><![CDATA[productname]]></fieldDescription>
+	</field>
+	<field name="discontinued" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[discontinued]]></fieldDescription>
+	</field>
+	<field name="category" class="com.company.jasperreportsdemo.entities.Category">
+		<fieldDescription><![CDATA[category]]></fieldDescription>
+	</field>
+	<field name="unitprice" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[unitprice]]></fieldDescription>
+	</field>
+	<field name="unitsinstock" class="java.lang.Short">
+		<fieldDescription><![CDATA[unitsinstock]]></fieldDescription>
+	</field>
+	<group name="Group1">
+		<groupExpression><![CDATA[$F{category}.getCategoryname()]]></groupExpression>
+		<groupHeader>
+			<band height="30">
+				<textField>
+					<reportElement x="0" y="0" width="210" height="30" uuid="383df124-b593-4615-b493-88d6058baf29"/>
+					<textFieldExpression><![CDATA[$F{category}.getCategoryname()]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<detail>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="30" uuid="b85102f9-8903-46a0-b333-d4ff20897f59"/>
+				<textFieldExpression><![CDATA[$F{productid}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="30" uuid="10c34caf-d276-4356-990f-ad572d32ff7f"/>
+				<textFieldExpression><![CDATA[$F{productname}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="200" y="0" width="100" height="30" uuid="26c435a9-0a47-484a-b537-6a789c1e0f1e"/>
+				<textFieldExpression><![CDATA[$F{unitprice}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="300" y="0" width="100" height="30" uuid="fe05322b-35e3-497a-9db2-7d28402d9c6d"/>
+				<textFieldExpression><![CDATA[$F{supplier}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

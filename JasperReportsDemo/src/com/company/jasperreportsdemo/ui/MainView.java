@@ -9,7 +9,9 @@ import java.util.Map;
 
 import com.company.jasperreportsdemo.business.ReportCreator;
 import com.company.jasperreportsdemo.dal.EmployeeDAO;
+import com.company.jasperreportsdemo.dal.ProductDAO;
 import com.company.jasperreportsdemo.entities.Employee;
+import com.company.jasperreportsdemo.entities.Product;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -52,6 +54,38 @@ public class MainView extends XdevView {
 		report.setDataSource(data);
 		report.setParameterMap(parameterMap);
 		report.setTemplatePath("WebContent/WEB-INF/resources/reports/Report 1 - Basic.jasper");
+		
+		try {
+			browserFrame.setSource(report.getResource());
+		} catch (JRException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Event handler delegate method for the {@link XdevButton}
+	 * {@link #button2}.
+	 *
+	 * @see Button.ClickListener#buttonClick(Button.ClickEvent)
+	 * @eventHandlerDelegate Do NOT delete, used by UI designer!
+	 */
+	private void button2_buttonClick(Button.ClickEvent event) {
+		List<Product> productList = new ProductDAO().findAll();
+
+		JRBeanCollectionDataSource data = new JRBeanCollectionDataSource(productList);
+		
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("creator", "Christian Kümmel");
+		parameterMap.put("created", new Date());
+		
+		ReportCreator report = new ReportCreator();
+		report.setDataSource(data);
+		report.setParameterMap(parameterMap);
+		report.setTemplatePath("WebContent/WEB-INF/resources/reports/Report 2 - Group.jasper");
 		
 		try {
 			browserFrame.setSource(report.getResource());
@@ -145,6 +179,7 @@ public class MainView extends XdevView {
 		this.setSizeFull();
 	
 		button.addClickListener(event -> this.button_buttonClick(event));
+		button2.addClickListener(event -> this.button2_buttonClick(event));
 	} // </generated-code>
 
 	// <generated-code name="variables">
