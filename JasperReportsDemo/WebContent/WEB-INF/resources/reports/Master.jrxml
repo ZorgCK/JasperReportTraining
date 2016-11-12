@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Master" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.6105100000000017"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="firmenhintergrund" class="java.lang.Boolean"/>
+	<parameter name="firmenlogo" class="java.lang.Boolean"/>
+	<parameter name="firmenname" class="java.lang.Boolean"/>
+	<parameter name="adresse" class="java.lang.Boolean"/>
+	<parameter name="erstelldatum" class="java.lang.Boolean"/>
+	<parameter name="seitennummer" class="java.lang.Boolean"/>
+	<parameter name="ersteller" class="java.lang.Boolean"/>
+	<parameter name="geschäftsführer" class="java.lang.Boolean"/>
+	<parameter name="subreportname" class="java.lang.String"/>
+	<parameter name="MySubReportDataSource" class="net.sf.jasperreports.engine.JRDataSource"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Programme\\XDEV Software\\XDEV 3\\workspace\\default\\projects\\EMV_Schulung\\res\\reports\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="titel" class="java.lang.String"/>
+	<parameter name="hoehe" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[10]]></defaultValueExpression>
+	</parameter>
+	<variable name="aktdatum" class="java.util.Date">
+		<variableExpression><![CDATA[new java.util.Date()]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="118" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{firmenhintergrund} == true || $P{firmenlogo} == true || $P{geschäftsführer} == true]]></printWhenExpression>
+			<image scaleImage="FillFrame">
+				<reportElement x="0" y="0" width="555" height="118">
+					<printWhenExpression><![CDATA[$P{firmenhintergrund} == true]]></printWhenExpression>
+				</reportElement>
+				<imageExpression class="java.lang.String"><![CDATA["C:\\Programme\\XDEV Software\\XDEV 3\\workspace\\default\\projects\\EMV_Schulung\\res\\images\\layout\\banner-vw.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="431" y="18" width="100" height="30">
+					<printWhenExpression><![CDATA[$P{geschäftsführer} == true]]></printWhenExpression>
+				</reportElement>
+				<textElement/>
+				<text><![CDATA[Geschäftsführer Markus Schmitt]]></text>
+			</staticText>
+			<image scaleImage="FillFrame">
+				<reportElement x="338" y="61" width="205" height="36">
+					<printWhenExpression><![CDATA[$P{firmenlogo} == true]]></printWhenExpression>
+				</reportElement>
+				<imageExpression class="java.lang.String"><![CDATA["C:\\Programme\\XDEV Software\\XDEV 3\\workspace\\default\\projects\\EMV_Schulung\\res\\images\\layout\\guentherundschmitt_logo.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="82" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{adresse} == true || $P{firmenname} == true]]></printWhenExpression>
+			<staticText>
+				<reportElement x="0" y="10" width="83" height="28">
+					<printWhenExpression><![CDATA[$P{firmenname} == true]]></printWhenExpression>
+				</reportElement>
+				<textElement/>
+				<text><![CDATA[Autohaus Günther&Schmitt]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="38" width="83" height="44">
+					<printWhenExpression><![CDATA[$P{adresse} == true]]></printWhenExpression>
+				</reportElement>
+				<textElement/>
+				<text><![CDATA[Bauerstrasse 42 92224 Amberg Tel.: 09621/88795]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="191" splitType="Stretch">
+			<subreport>
+				<reportElement x="0" y="0" width="555" height="191"/>
+				<subreportParameter name="firmenname">
+					<subreportParameterExpression><![CDATA[$P{firmenname}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="seitennummer">
+					<subreportParameterExpression><![CDATA[$P{seitennummer}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="firmenhintergrund">
+					<subreportParameterExpression><![CDATA[$P{firmenhintergrund}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="adresse">
+					<subreportParameterExpression><![CDATA[$P{adresse}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="geschäftsführer">
+					<subreportParameterExpression><![CDATA[$P{geschäftsführer}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="subreportname">
+					<subreportParameterExpression><![CDATA[$P{subreportname}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="markierung"/>
+				<subreportParameter name="firmenlogo">
+					<subreportParameterExpression><![CDATA[$P{firmenlogo}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="mysubreportdatasource">
+					<subreportParameterExpression><![CDATA[$P{MySubReportDataSource}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="ersteller">
+					<subreportParameterExpression><![CDATA[$P{ersteller}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="Abteilung"/>
+				<subreportParameter name="titel">
+					<subreportParameterExpression><![CDATA[$P{titel}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="Ersteller"/>
+				<subreportParameter name="Niederlassung"/>
+				<subreportParameter name="erstelldatum">
+					<subreportParameterExpression><![CDATA[$P{erstelldatum}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[$P{MySubReportDataSource}]]></dataSourceExpression>
+				<subreportExpression class="java.lang.String"><![CDATA[$P{SUBREPORT_DIR} + $P{subreportname} + ".jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="32" splitType="Stretch">
+			<printWhenExpression><![CDATA[$P{seitennummer} == true || $P{erstelldatum} == true ||$P{ersteller} == true]]></printWhenExpression>
+			<textField>
+				<reportElement x="277" y="12" width="100" height="20">
+					<printWhenExpression><![CDATA[$P{seitennummer} == true]]></printWhenExpression>
+				</reportElement>
+				<textElement/>
+				<textFieldExpression class="java.lang.Integer"><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="72" height="32">
+					<printWhenExpression><![CDATA[$P{ersteller} == true]]></printWhenExpression>
+				</reportElement>
+				<textElement/>
+				<text><![CDATA[Müller Herbert Controller]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="477" y="12" width="78" height="20">
+					<printWhenExpression><![CDATA[$P{erstelldatum} == true]]></printWhenExpression>
+				</reportElement>
+				<textElement/>
+				<textFieldExpression class="java.util.Date"><![CDATA[$V{aktdatum}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

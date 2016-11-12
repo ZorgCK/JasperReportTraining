@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BarCode" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.771561000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="style1">
+		<box>
+			<topPen lineWidth="1.0"/>
+			<leftPen lineWidth="1.0"/>
+			<bottomPen lineWidth="1.0"/>
+			<rightPen lineWidth="1.0"/>
+		</box>
+	</style>
+	<field name="Hersteller" class="java.lang.String"/>
+	<field name="Bilder" class="java.lang.String"/>
+	<field name="Modell" class="java.lang.String"/>
+	<field name="Kilometerstand" class="java.lang.String"/>
+	<field name="Leistung" class="java.lang.String"/>
+	<field name="Erstzulassung" class="java.lang.String"/>
+	<field name="Preis" class="java.lang.String"/>
+	<field name="Farbe" class="java.lang.String"/>
+	<field name="Barcode" class="java.lang.String"/>
+	<group name="Hersteller" isStartNewPage="true" isReprintHeaderOnEachPage="true">
+		<groupExpression><![CDATA[$F{Hersteller}]]></groupExpression>
+		<groupHeader>
+			<band height="38">
+				<textField>
+					<reportElement x="205" y="0" width="147" height="38"/>
+					<box leftPadding="5" rightPadding="5"/>
+					<textElement textAlignment="Center">
+						<font size="20" isBold="true"/>
+					</textElement>
+					<textFieldExpression class="java.lang.String"><![CDATA[$F{Hersteller}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+	</group>
+	<pageHeader>
+		<band height="57" splitType="Stretch">
+			<staticText>
+				<reportElement x="160" y="0" width="223" height="34"/>
+				<textElement>
+					<font size="24" isBold="true" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Barcode Übersicht]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="92" splitType="Stretch">
+			<rectangle>
+				<reportElement style="style1" x="0" y="0" width="555" height="92"/>
+			</rectangle>
+			<textField>
+				<reportElement style="style1" x="120" y="35" width="100" height="20"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Kilometerstand}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="style1" x="277" y="55" width="100" height="20"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Leistung}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="style1" x="120" y="55" width="100" height="20"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Erstzulassung}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="style1" x="277" y="35" width="100" height="20"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Preis}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement style="style1" x="277" y="15" width="100" height="20"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Farbe}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="425" y="8" width="108" height="74" isPrintInFirstWholeBand="true"/>
+				<jr:EAN13 xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" textPosition="bottom">
+					<jr:codeExpression><![CDATA[$F{Barcode}]]></jr:codeExpression>
+				</jr:EAN13>
+			</componentElement>
+			<staticText>
+				<reportElement style="style1" x="20" y="15" width="100" height="20"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement/>
+				<text><![CDATA[Modell:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="20" y="35" width="100" height="20"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement/>
+				<text><![CDATA[Kilometerstand:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="20" y="55" width="100" height="20"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement/>
+				<text><![CDATA[Erstzulassung:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="220" y="15" width="57" height="20"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement/>
+				<text><![CDATA[Farbe:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="220" y="35" width="57" height="20"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement/>
+				<text><![CDATA[Preis:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="style1" x="220" y="55" width="57" height="20"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement/>
+				<text><![CDATA[Leistung:]]></text>
+			</staticText>
+			<textField>
+				<reportElement style="style1" x="120" y="15" width="100" height="20"/>
+				<box leftPadding="5" rightPadding="5"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{Modell}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

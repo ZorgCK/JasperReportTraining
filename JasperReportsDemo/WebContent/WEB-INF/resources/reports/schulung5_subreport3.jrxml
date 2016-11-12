@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="schulung5_subreport3" language="groovy" pageWidth="555" pageHeight="344" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="Hersteller" class="java.lang.String"/>
+	<field name="Modell" class="java.lang.String"/>
+	<field name="Anzahl" class="java.lang.Integer"/>
+	<variable name="anzjehersteller" class="java.lang.Integer" resetType="Group" resetGroup="Hersteller" calculation="Sum">
+		<variableExpression><![CDATA[$F{Anzahl}]]></variableExpression>
+	</variable>
+	<group name="Hersteller" isStartNewPage="true">
+		<groupExpression><![CDATA[$F{Hersteller}]]></groupExpression>
+		<groupFooter>
+			<band height="344">
+				<bar3DChart>
+					<chart>
+						<reportElement x="0" y="74" width="555" height="270"/>
+						<chartTitle/>
+						<chartSubtitle/>
+						<chartLegend/>
+					</chart>
+					<categoryDataset>
+						<categorySeries>
+							<seriesExpression><![CDATA[$F{Hersteller}]]></seriesExpression>
+							<categoryExpression><![CDATA[$F{Hersteller}]]></categoryExpression>
+							<valueExpression><![CDATA[$V{anzjehersteller}]]></valueExpression>
+						</categorySeries>
+					</categoryDataset>
+					<bar3DPlot xOffset="20.0" yOffset="0.0">
+						<plot labelRotation="50.0"/>
+						<itemLabel color="#000000" backgroundColor="#FFFFFF"/>
+						<categoryAxisFormat labelRotation="50.0">
+							<axisFormat>
+								<labelFont/>
+								<tickLabelFont/>
+							</axisFormat>
+						</categoryAxisFormat>
+						<valueAxisFormat>
+							<axisFormat>
+								<labelFont/>
+								<tickLabelFont/>
+							</axisFormat>
+						</valueAxisFormat>
+					</bar3DPlot>
+				</bar3DChart>
+				<staticText>
+					<reportElement x="84" y="0" width="355" height="74"/>
+					<textElement textAlignment="Center">
+						<font size="26" isBold="true" isItalic="true"/>
+					</textElement>
+					<text><![CDATA[Gesamtanzahl Fahrzeuge nach Hersteller]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+</jasperReport>

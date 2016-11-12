@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2016-11-12T11:19:09 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="schulung1" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="e7994e72-0fb2-44f9-b1d1-02b81f07bb00">
+	<property name="ireport.zoom" value="1.9487171000000014"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<style name="style1"/>
+	<subDataset name="test" uuid="cfcb36b1-4228-4f7b-afb8-0dd55c94cae1">
+		<field name="SSN" class="java.lang.String"/>
+		<field name="Name" class="java.lang.String"/>
+		<field name="Home_street" class="java.lang.String"/>
+		<field name="Home_zip" class="java.lang.String"/>
+		<field name="Home_city" class="java.lang.String"/>
+		<field name="Age" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="Niederlassung" class="java.lang.String"/>
+	<parameter name="Abteilung" class="java.lang.String"/>
+	<parameter name="Ersteller" class="java.lang.String"/>
+	<parameter name="markierung" class="java.lang.String"/>
+	<title>
+		<band height="83" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="16" width="299" height="45" uuid="51f14a23-facd-4b41-a69e-d5fec66783bf"/>
+				<textElement>
+					<font fontName="Arial" size="30"/>
+				</textElement>
+				<text><![CDATA[Übung 1 Auflistungen]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="455" y="8" width="100" height="20" uuid="04f8bc32-cbf4-4b1f-8cf5-01d4a0a1a2dd"/>
+				<textFieldExpression><![CDATA[$P{Niederlassung}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="28" width="100" height="20" uuid="54afaa1e-7c9c-4402-a929-db723a53400a"/>
+				<textFieldExpression><![CDATA[$P{Abteilung}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="48" width="100" height="20" uuid="307382bf-3829-4639-88ee-e8d7b4e0b20e"/>
+				<textFieldExpression><![CDATA[$P{Ersteller}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="355" y="8" width="100" height="20" uuid="80afc9b3-25c9-4044-aa8e-6f4d82730e0f">
+					<printWhenExpression><![CDATA[$P{Niederlassung} != ""]]></printWhenExpression>
+				</reportElement>
+				<text><![CDATA[Niederlassung:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="28" width="100" height="20" uuid="00a373e7-b2d9-46a2-b1b4-509c3aba4fc4">
+					<printWhenExpression><![CDATA[$P{Abteilung} != ""]]></printWhenExpression>
+				</reportElement>
+				<text><![CDATA[Abteilung:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="48" width="100" height="20" uuid="7f225ce4-f2ef-43c8-b21c-da7bd844629e">
+					<printWhenExpression><![CDATA[$P{Ersteller} != ""]]></printWhenExpression>
+				</reportElement>
+				<text><![CDATA[Ersteller:]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="37" splitType="Stretch">
+			<line>
+				<reportElement x="0" y="21" width="555" height="1" uuid="35076d1f-9122-4858-9979-311c4d51eac4"/>
+			</line>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="20" isRemoveLineWhenBlank="true" backcolor="#FFFFCC" uuid="d2fd0f20-d67f-4809-b9f1-4213af7cdbc4"/>
+			</rectangle>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="39" splitType="Stretch">
+			<textField>
+				<reportElement x="270" y="19" width="100" height="20" uuid="72853c79-16ca-419c-96e8-1ff3f1443bd9"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>
