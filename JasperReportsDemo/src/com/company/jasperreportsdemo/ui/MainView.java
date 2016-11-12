@@ -74,7 +74,7 @@ public class MainView extends XdevView {
 	 * @eventHandlerDelegate Do NOT delete, used by UI designer!
 	 */
 	private void button2_buttonClick(Button.ClickEvent event) {
-		List<Product> productList = new ProductDAO().findAll();
+		List<Product> productList = new ProductDAO().getProductsOrderedByCategory();
 
 		JRBeanCollectionDataSource data = new JRBeanCollectionDataSource(productList);
 		
