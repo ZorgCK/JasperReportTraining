@@ -27,6 +27,7 @@
                 </XdevButton>
                 <XdevButton caption="Report 3 - Grid" x:name="button3">
                     <x:constraints weighty="0.0" width="100%" />
+                    <x:event>click.buttonClick</x:event>
                 </XdevButton>
                 <XdevButton caption="Report 4 - Images" x:name="button4">
                     <x:constraints weighty="0.0" width="100%" />

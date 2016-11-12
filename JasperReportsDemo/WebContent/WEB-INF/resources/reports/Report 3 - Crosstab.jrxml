@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2016-11-12T22:57:33 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Report 3 - Crosstab" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f5c42a11-be8f-4c83-a110-15855dac5ed9">
+	<parameter name="creator" class="java.lang.String"/>
+	<parameter name="created" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="product" class="com.company.jasperreportsdemo.entities.Product">
+		<fieldDescription><![CDATA[product]]></fieldDescription>
+	</field>
+	<field name="quantity" class="java.lang.Short">
+		<fieldDescription><![CDATA[quantity]]></fieldDescription>
+	</field>
+	<field name="discount" class="java.lang.Float">
+		<fieldDescription><![CDATA[discount]]></fieldDescription>
+	</field>
+	<field name="id" class="com.company.jasperreportsdemo.entities.OrderdetailId">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
+	</field>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<field name="unitprice" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[unitprice]]></fieldDescription>
+	</field>
+	<field name="order" class="com.company.jasperreportsdemo.entities.Order">
+		<fieldDescription><![CDATA[order]]></fieldDescription>
+	</field>
+	<variable name="AnzPos" class="java.lang.Integer" resetType="Group" resetGroup="Group1" calculation="Count">
+		<variableExpression><![CDATA[$F{quantity}]]></variableExpression>
+	</variable>
+	<variable name="GesPos" class="java.math.BigDecimal">
+		<variableExpression><![CDATA[$F{unitprice}.multiply(new BigDecimal($F{quantity}))]]></variableExpression>
+	</variable>
+	<variable name="PosNr" class="java.lang.Integer" resetType="Group" resetGroup="Group1" calculation="Count">
+		<variableExpression><![CDATA[$F{quantity}]]></variableExpression>
+	</variable>
+	<variable name="RechGes" class="java.math.BigDecimal" resetType="Group" resetGroup="Group1" calculation="Sum">
+		<variableExpression><![CDATA[$V{GesPos}]]></variableExpression>
+	</variable>
+	<variable name="PageGes" class="java.math.BigDecimal" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$V{RechGes}]]></variableExpression>
+	</variable>
+	<variable name="ReportGes" class="java.math.BigDecimal" resetType="None" calculation="Sum">
+		<variableExpression><![CDATA[$V{PageGes}]]></variableExpression>
+	</variable>
+	<variable name="Variable_1" class="java.lang.String"/>
+	<group name="Group1" keepTogether="true">
+		<groupExpression><![CDATA[$F{order}.getOrderid()]]></groupExpression>
+		<groupHeader>
+			<band height="40">
+				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				<staticText>
+					<reportElement positionType="Float" x="0" y="14" width="100" height="15" uuid="1be0a20d-5ee7-428f-bd31-dcf42c7b51a6">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<text><![CDATA[Rechnungsnummer:]]></text>
+				</staticText>
+				<textField>
+					<reportElement positionType="Float" x="100" y="14" width="100" height="15" uuid="b8518b6d-9290-4a17-9345-4fe50d58afba">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$F{order}.getOrderid()]]></textFieldExpression>
+				</textField>
+				<textField evaluationTime="Group" evaluationGroup="Group1">
+					<reportElement positionType="Float" x="304" y="14" width="100" height="15" uuid="15bdf999-aa46-4158-b6f6-fca73d47cb19">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textFieldExpression><![CDATA[$V{AnzPos}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement positionType="Float" x="210" y="14" width="94" height="15" uuid="78a1f24e-3d30-42ca-b56a-50f2139dd57d">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<text><![CDATA[Anzahl Positionen:]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="20">
+				<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				<textField pattern="#,##0.00 ¤;#,##0.00- ¤">
+					<reportElement positionType="Float" x="474" y="0" width="80" height="15" uuid="3cb2820a-7005-4fd6-a286-0052da94cf42">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid"/>
+						<bottomPen lineWidth="1.0" lineStyle="Double"/>
+					</box>
+					<textElement textAlignment="Right"/>
+					<textFieldExpression><![CDATA[$V{RechGes}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="138" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="10" width="350" height="49" uuid="c8f9c33e-aeaf-4178-8a5c-03a034e964a1"/>
+				<textElement verticalAlignment="Middle">
+					<font size="29"/>
+				</textElement>
+				<text><![CDATA[Übung 3 - Berechnungen]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="360" y="30" width="184" height="20" uuid="fa2e9126-5d10-408d-b5d5-2870aef94ca0"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Erstellt am: " + $P{created}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="10" width="184" height="20" uuid="44f970e0-ad88-4cd8-8f24-5e599f33a7a0"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Erstellt von: " + $P{creator}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="30" y="75" width="500" height="30" uuid="f1ad3e3e-ec61-42ff-beb8-3b4bd799924e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Preise, Mengen und Durchschnittsberechnungen]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement positionType="Float" x="40" y="0" width="30" height="15" uuid="9e62f98f-b3ab-4d03-9120-e5747e295744"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$V{PosNr}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 ¤;#,##0.00-  ¤">
+				<reportElement positionType="Float" x="314" y="0" width="80" height="15" uuid="8c070fd7-ac3b-4dbd-9f81-d0729c28f0f2"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{unitprice}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="70" y="0" width="244" height="15" uuid="1679a190-c829-4b6c-8f4c-9b3c0d586e59">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{product}.getProductname()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement positionType="Float" x="394" y="0" width="80" height="15" uuid="54521abc-58a3-477a-87c6-d1f2a332b678"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$F{quantity}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00 ¤;#,##0.00- ¤">
+				<reportElement positionType="Float" x="474" y="0" width="80" height="15" uuid="9a9079ac-7d86-4882-aa35-76705e642ab9">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{GesPos}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="20">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField pattern="#,##0.00 ¤;#,##0.00- ¤">
+				<reportElement positionType="Float" x="474" y="0" width="80" height="15" uuid="79ee2a0d-9fa3-4540-bebb-ffb48469decf">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{PageGes}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="404" y="0" width="70" height="15" uuid="efad7ca3-2b61-4877-839e-75503c4b2c5f">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[Seite gesamt:]]></text>
+			</staticText>
+			<textField>
+				<reportElement positionType="Float" x="240" y="0" width="40" height="15" uuid="25c1d36e-eeb6-4054-9082-d7256aa3507b">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA["Seite " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement positionType="Float" x="280" y="0" width="100" height="15" uuid="10677511-e0a0-4207-999a-77cc0884e6ff">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA["von " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="20">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField pattern="#,##0.00 ¤;#,##0.00- ¤">
+				<reportElement positionType="Float" x="474" y="4" width="80" height="15" uuid="45da38f1-c930-46e1-8ac4-e837d4dbc048">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid"/>
+					<bottomPen lineWidth="1.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[$V{ReportGes}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="404" y="4" width="70" height="15" uuid="5e0464a4-af3a-4fb1-ad2e-1023be145241">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<text><![CDATA[Report gesamt:]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>
