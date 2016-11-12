@@ -1,28 +1,19 @@
 
 package com.company.jasperreportsdemo.ui;
 
-import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import com.company.jasperreportsdemo.business.ReportCreator;
 import com.company.jasperreportsdemo.dal.EmployeeDAO;
 import com.company.jasperreportsdemo.entities.Employee;
-import com.vaadin.server.StreamResource;
-import com.vaadin.server.StreamResource.StreamSource;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.CustomComponent;
-import com.xdev.res.ApplicationResource;
 import com.xdev.ui.XdevBrowserFrame;
 import com.xdev.ui.XdevButton;
 import com.xdev.ui.XdevGridLayout;
@@ -31,22 +22,9 @@ import com.xdev.ui.XdevVerticalLayout;
 import com.xdev.ui.XdevView;
 
 import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.engine.JasperRunManager;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.util.JRLoader;
 
 public class MainView extends XdevView {
-
-	private static final Logger logger = LoggerFactory.getLogger(MainView.class);
-	private StreamResource resource;
-	public static final String CLOUD_MANAGER_WAR_UPLOAD_FILE_DIRECTORY = System.getProperty("java.io.tmpdir");
-	
-	public static String getTempPath() throws IOException
-	{
-		Path tempDir = Files.createDirectories(Paths.get(CLOUD_MANAGER_WAR_UPLOAD_FILE_DIRECTORY));
-		return tempDir.toAbsolutePath().toString();
-	}
 	
 	/**
 	 * 
@@ -64,46 +42,26 @@ public class MainView extends XdevView {
 	 */
 	private void button_buttonClick(Button.ClickEvent event) {
 		List<Employee> employeeList = new EmployeeDAO().findAll();
-
 		JRBeanCollectionDataSource data = new JRBeanCollectionDataSource(employeeList);
-	}
-
-	private void loadAndFillReport(JRBeanCollectionDataSource ds, Map<String, Object> reportParameter) throws JRException {
-		JasperReport report = (JasperReport) JRLoader.loadObject(
-				new ApplicationResource(this.getClass(), "WebContent/WEB-INF/resources/reports/Report 1 - Basic.jasper")
-						.getStream().getStream());
-
-//		Map<String, Object> reportParameter = new HashMap<String, Object>();
-//		reportParameter.put("ReportPath", VaadinService.getCurrent().getBaseDirectory().getAbsolutePath());
-
-		StreamResource.StreamSource source = new StreamSource() {
-			@Override
-			public InputStream getStream() {
-				byte[] b = null;
-
-				try {
-
-					b = JasperRunManager.runReportToPdf(report, reportParameter, ds);
-				} catch (JRException ex) {
-					System.out.println(ex);
-					logger.info("Ich bin ein logger:" + ex.getMessage());
-				}
-
-				return new ByteArrayInputStream(b);
-			}
-		};
-
+		
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("creator", "Christian Kümmel");
+		parameterMap.put("created", new Date());
+		
+		ReportCreator report = new ReportCreator();
+		report.setDataSource(data);
+		report.setParameterMap(parameterMap);
+		report.setTemplatePath("WebContent/WEB-INF/resources/reports/Report 1 - Basic.jasper");
+		
 		try {
-			this.resource = new StreamResource(source,
-					getTempPath() + File.separator + "myreport_" + System.currentTimeMillis() + ".pdf");
-			this.resource.setMIMEType("application/pdf");
-
+			browserFrame.setSource(report.getResource());
+		} catch (JRException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			logger.info("Ich bin ein logger:" + e.getMessage());
 		}
-
 	}
 
 	/*
@@ -124,9 +82,9 @@ public class MainView extends XdevView {
 		this.button7 = new XdevButton();
 		this.button8 = new XdevButton();
 		this.browserFrame = new XdevBrowserFrame();
-
-		this.horizontalSplitPanel.setSplitPosition(245.0F, Unit.PERCENTAGE);
-		this.verticalLayout.setMargin(new MarginInfo(false));
+	
+		this.horizontalSplitPanel.setSplitPosition(30.0F, Unit.PERCENTAGE);
+		this.verticalLayout.setMargin(new MarginInfo(false, true, false, false));
 		this.button.setCaption("Report 1 - Basic");
 		this.button2.setCaption("Report 2 - Group");
 		this.button3.setCaption("Report 3 - Grid");
@@ -135,7 +93,7 @@ public class MainView extends XdevView {
 		this.button6.setCaption("Report 6 - SubReports");
 		this.button7.setCaption("Report 7 - Invoice");
 		this.button8.setCaption("Report 8 - BarCode");
-
+	
 		this.button.setWidth(100, Unit.PERCENTAGE);
 		this.button.setHeight(-1, Unit.PIXELS);
 		this.verticalLayout.addComponent(this.button);
@@ -185,7 +143,7 @@ public class MainView extends XdevView {
 		this.gridLayout.setSizeFull();
 		this.setContent(this.gridLayout);
 		this.setSizeFull();
-
+	
 		button.addClickListener(event -> this.button_buttonClick(event));
 	} // </generated-code>
 
