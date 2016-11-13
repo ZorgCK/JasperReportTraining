@@ -59,7 +59,6 @@ public class ReportCreator {
 
 	private StreamResource loadAndFillReport() throws JRException, IOException {
 		JasperReport report = (JasperReport) JRLoader.loadObject(
-//				new ApplicationResource(this.getClass(), "WebContent/WEB-INF/resources/reports/Report 1 - Basic.jasper")
 				new ApplicationResource(this.getClass(), this.getTemplatePath())
 						.getStream().getStream());
 

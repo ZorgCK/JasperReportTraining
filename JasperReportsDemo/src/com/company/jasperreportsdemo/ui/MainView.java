@@ -211,6 +211,42 @@ public class MainView extends XdevView {
 
 	}
 
+	/**
+	 * Event handler delegate method for the {@link XdevButton}
+	 * {@link #button6}.
+	 *
+	 * @see Button.ClickListener#buttonClick(Button.ClickEvent)
+	 * @eventHandlerDelegate Do NOT delete, used by UI designer!
+	 */
+	private void button6_buttonClick(Button.ClickEvent event) {
+		List<Employee> employeeList = new EmployeeDAO().findAll();
+		JRBeanCollectionDataSource data = new JRBeanCollectionDataSource(employeeList);
+		JRBeanCollectionDataSource subReportDataSource = new JRBeanCollectionDataSource(employeeList);
+		
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("creator", "Christian Kümmel");
+		parameterMap.put("created", new Date());
+		parameterMap.put("SubReportPath", "WebContent/WEB-INF/resources/reports/Report 6 - SubOrder" + ".jasper");
+		parameterMap.put("EmployeeSubReportDataSource", subReportDataSource);
+		
+		ReportCreator report = new ReportCreator();
+		report.setDataSource(data);
+		report.setParameterMap(parameterMap);
+		report.setTemplatePath("WebContent/WEB-INF/resources/reports/Report 6 - Master" + ".jasper");
+
+		try {
+			browserFrame.setSource(report.getResource());
+		} catch (JRException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+
 	/*
 	 * WARNING: Do NOT edit!<br>The content of this method is always regenerated
 	 * by the UI designer.
@@ -297,6 +333,7 @@ public class MainView extends XdevView {
 		button3.addClickListener(event -> this.button3_buttonClick(event));
 		button4.addClickListener(event -> this.button4_buttonClick(event));
 		button5.addClickListener(event -> this.button5_buttonClick(event));
+		button6.addClickListener(event -> this.button6_buttonClick(event));
 	} // </generated-code>
 
 	// <generated-code name="variables">

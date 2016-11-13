@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2016-11-13T18:16:35 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Report 6 - Master" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="75c86d47-f1ee-4116-8efd-fad87833c006">
+	<parameter name="creator" class="java.lang.String"/>
+	<parameter name="created" class="java.util.Date"/>
+	<parameter name="SubReportPath" class="java.lang.String"/>
+	<parameter name="EmployeeSubReportDataSource" class="net.sf.jasperreports.engine.data.JRBeanCollectionDataSource"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="firstname" class="java.lang.String">
+		<fieldDescription><![CDATA[firstname]]></fieldDescription>
+	</field>
+	<field name="lastname" class="java.lang.String">
+		<fieldDescription><![CDATA[lastname]]></fieldDescription>
+	</field>
+	<field name="orders" class="java.util.Set">
+		<fieldDescription><![CDATA[orders]]></fieldDescription>
+	</field>
+	<title>
+		<band height="80" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="360" y="10" width="184" height="20" uuid="c1ff7e04-2a17-4645-80cb-875ff9e1edaf"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Erstellt von: " + $P{creator}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="10" width="350" height="49" uuid="3002846a-456a-4504-8bb9-60136368a147"/>
+				<textElement verticalAlignment="Middle">
+					<font size="29"/>
+				</textElement>
+				<text><![CDATA[Übung 6 - Subreports]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="360" y="30" width="184" height="20" uuid="3d97437d-03b0-4926-80c3-d1a8b6d0aac8"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Erstellt am: " + $P{created}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="261" splitType="Stretch">
+			<subreport>
+				<reportElement x="-20" y="0" width="595" height="261" uuid="b8263ac3-39a8-414c-a1a7-742516d0e0f9"/>
+				<dataSourceExpression><![CDATA[$P{EmployeeSubReportDataSource}]]></dataSourceExpression>
+				<subreportExpression><![CDATA["C:/Users/Christian/Workspace3.0/git/JasperReportTraining/JasperReportsDemo/WebContent/WEB-INF/resources/reports/Report 6 - SubOrder.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+</jasperReport>
