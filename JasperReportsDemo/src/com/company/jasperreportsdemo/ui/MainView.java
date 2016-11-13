@@ -18,11 +18,11 @@ import com.company.jasperreportsdemo.entities.queryObjects.ProductCategorySum;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
-import com.vaadin.ui.CustomComponent;
 import com.xdev.ui.XdevBrowserFrame;
 import com.xdev.ui.XdevButton;
 import com.xdev.ui.XdevGridLayout;
 import com.xdev.ui.XdevHorizontalSplitPanel;
+import com.xdev.ui.XdevImage;
 import com.xdev.ui.XdevVerticalLayout;
 import com.xdev.ui.XdevView;
 
@@ -165,6 +165,52 @@ public class MainView extends XdevView {
 		}
 	}
 
+	/**
+	 * Event handler delegate method for the {@link XdevButton}
+	 * {@link #button4}.
+	 *
+	 * @see Button.ClickListener#buttonClick(Button.ClickEvent)
+	 * @eventHandlerDelegate Do NOT delete, used by UI designer!
+	 */
+	private void button4_buttonClick(Button.ClickEvent event) {
+		List<Employee> employeeList = new EmployeeDAO().findAll();
+		
+//		StreamResource.StreamSource imagesource = new StreamSource() {
+//			@Override
+//			public InputStream getStream() {
+//				byte[] b = findAll.get(3).getPhoto();
+//				return new ByteArrayInputStream(b);
+//			}
+//		};
+//		
+//		StreamResource resource = new StreamResource(imagesource, "myimage.png");
+//		
+//		image.setSource(resource);
+		
+		
+		JRBeanCollectionDataSource data = new JRBeanCollectionDataSource(employeeList);
+
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("creator", "Christian Kümmel");
+		parameterMap.put("created", new Date());
+
+		ReportCreator report = new ReportCreator();
+		report.setDataSource(data);
+		report.setParameterMap(parameterMap);
+		report.setTemplatePath("WebContent/WEB-INF/resources/reports/Report 4 - Images" + ".jasper");
+
+		try {
+			browserFrame.setSource(report.getResource());
+		} catch (JRException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+
 	/*
 	 * WARNING: Do NOT edit!<br>The content of this method is always regenerated
 	 * by the UI designer.
@@ -182,8 +228,9 @@ public class MainView extends XdevView {
 		this.button6 = new XdevButton();
 		this.button7 = new XdevButton();
 		this.button8 = new XdevButton();
+		this.image = new XdevImage();
 		this.browserFrame = new XdevBrowserFrame();
-
+	
 		this.horizontalSplitPanel.setSplitPosition(30.0F, Unit.PERCENTAGE);
 		this.verticalLayout.setMargin(new MarginInfo(false, true, false, false));
 		this.button.setCaption("Report 1 - Basic");
@@ -194,7 +241,7 @@ public class MainView extends XdevView {
 		this.button6.setCaption("Report 6 - SubReports");
 		this.button7.setCaption("Report 7 - Invoice");
 		this.button8.setCaption("Report 8 - BarCode");
-
+	
 		this.button.setWidth(100, Unit.PERCENTAGE);
 		this.button.setHeight(-1, Unit.PIXELS);
 		this.verticalLayout.addComponent(this.button);
@@ -227,10 +274,10 @@ public class MainView extends XdevView {
 		this.button8.setHeight(-1, Unit.PIXELS);
 		this.verticalLayout.addComponent(this.button8);
 		this.verticalLayout.setComponentAlignment(this.button8, Alignment.MIDDLE_CENTER);
-		CustomComponent verticalLayout_spacer = new CustomComponent();
-		verticalLayout_spacer.setSizeFull();
-		this.verticalLayout.addComponent(verticalLayout_spacer);
-		this.verticalLayout.setExpandRatio(verticalLayout_spacer, 1.0F);
+		this.image.setSizeFull();
+		this.verticalLayout.addComponent(this.image);
+		this.verticalLayout.setComponentAlignment(this.image, Alignment.MIDDLE_CENTER);
+		this.verticalLayout.setExpandRatio(this.image, 10.0F);
 		this.verticalLayout.setSizeFull();
 		this.horizontalSplitPanel.setFirstComponent(this.verticalLayout);
 		this.browserFrame.setSizeFull();
@@ -244,18 +291,21 @@ public class MainView extends XdevView {
 		this.gridLayout.setSizeFull();
 		this.setContent(this.gridLayout);
 		this.setSizeFull();
-
+	
 		button.addClickListener(event -> this.button_buttonClick(event));
 		button2.addClickListener(event -> this.button2_buttonClick(event));
 		button3.addClickListener(event -> this.button3_buttonClick(event));
+		button4.addClickListener(event -> this.button4_buttonClick(event));
 		button5.addClickListener(event -> this.button5_buttonClick(event));
 	} // </generated-code>
 
 	// <generated-code name="variables">
 	private XdevButton button, button2, button3, button4, button5, button6, button7, button8;
+	private XdevImage image;
 	private XdevBrowserFrame browserFrame;
 	private XdevGridLayout gridLayout;
 	private XdevVerticalLayout verticalLayout;
 	private XdevHorizontalSplitPanel horizontalSplitPanel; // </generated-code>
+
 
 }

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2016-11-13T11:45:38 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Report 4 - Images" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f7f9a7f8-ffa1-4ca0-add7-36b84e91a5e6">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="creator" class="java.lang.String"/>
+	<parameter name="created" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="firstname" class="java.lang.String">
+		<fieldDescription><![CDATA[firstname]]></fieldDescription>
+	</field>
+	<field name="photo" class="java.lang.Byte">
+		<fieldDescription><![CDATA[photo]]></fieldDescription>
+	</field>
+	<field name="lastname" class="java.lang.String">
+		<fieldDescription><![CDATA[lastname]]></fieldDescription>
+	</field>
+	<field name="photoStream" class="java.io.ByteArrayInputStream">
+		<fieldDescription><![CDATA[photoStream]]></fieldDescription>
+	</field>
+	<field name="country" class="java.lang.String">
+		<fieldDescription><![CDATA[country]]></fieldDescription>
+	</field>
+	<field name="address" class="java.lang.String">
+		<fieldDescription><![CDATA[address]]></fieldDescription>
+	</field>
+	<field name="homephone" class="java.lang.String">
+		<fieldDescription><![CDATA[homephone]]></fieldDescription>
+	</field>
+	<field name="city" class="java.lang.String">
+		<fieldDescription><![CDATA[city]]></fieldDescription>
+	</field>
+	<field name="title" class="java.lang.String">
+		<fieldDescription><![CDATA[title]]></fieldDescription>
+	</field>
+	<field name="postalcode" class="java.lang.String">
+		<fieldDescription><![CDATA[postalcode]]></fieldDescription>
+	</field>
+	<field name="class" class="java.lang.Class">
+		<fieldDescription><![CDATA[class]]></fieldDescription>
+	</field>
+	<title>
+		<band height="80" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="360" y="30" width="184" height="20" uuid="ebbcb654-12cc-41d2-8101-f25c9b3350ea"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Erstellt am: " + $P{created}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="10" width="184" height="20" uuid="5e3dddac-9444-40f5-97f7-6fc7c1ea2ea4"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Erstellt von: " + $P{creator}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="10" width="350" height="49" uuid="e569dcd3-1bfb-49ca-b1c2-26ddc5cdc9ab"/>
+				<textElement verticalAlignment="Middle">
+					<font size="29"/>
+				</textElement>
+				<text><![CDATA[Übung 4 - Images]]></text>
+			</staticText>
+		</band>
+	</title>
+	<detail>
+		<band height="217" splitType="Stretch">
+			<image hAlign="Center" vAlign="Middle" isLazy="true">
+				<reportElement x="350" y="14" width="189" height="188" uuid="81df383c-08ea-45e9-a1cd-6bdf0a56faba"/>
+				<imageExpression><![CDATA[$F{photoStream} ]]></imageExpression>
+			</image>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="50" y="26" width="300" height="30" uuid="05253fd2-4560-43ba-bbe3-15ea3814ae08">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="19" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{firstname} + " " + $F{lastname}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="50" y="72" width="300" height="30" uuid="19de76a8-60a4-4853-a702-614724e031f7">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="19" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{address}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="50" y="102" width="300" height="30" uuid="ad47adbc-84bc-4357-b2af-381f371efdb2">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="19" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{postalcode} + " " + $F{city}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="50" y="132" width="300" height="30" uuid="8807bd14-4488-45b1-8260-40a7c2138286">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="19" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{country}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="50" y="162" width="300" height="30" uuid="15a3e6b0-b2f0-42a1-9156-8aa27b8ca7a5">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement>
+					<font size="19" isUnderline="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Phone: " + $F{homephone}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

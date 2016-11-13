@@ -1,13 +1,16 @@
 package com.company.jasperreportsdemo.entities;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
+import java.io.ByteArrayInputStream;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import static javax.persistence.GenerationType.IDENTITY;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -18,6 +21,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import com.company.jasperreportsdemo.dal.EmployeeDAO;
 import com.xdev.dal.DAO;
@@ -54,6 +58,7 @@ public class Employee implements java.io.Serializable {
 	private Set<Territory> territories = new HashSet<Territory>(0);
 	private Set<Order> orders = new HashSet<Order>(0);
 	private Set<Employee> employees = new HashSet<Employee>(0);
+	private ByteArrayInputStream photoStream;
 
 	public Employee() {
 	}
@@ -320,6 +325,17 @@ public class Employee implements java.io.Serializable {
 
 	public void setEmployees(Set<Employee> employees) {
 		this.employees = employees;
+	}
+
+	@Transient
+	@Column(name = "PHOTOSTREAM")
+	public ByteArrayInputStream getPhotoStream() {
+		ByteArrayInputStream stream = new ByteArrayInputStream(this.photo);
+		return stream;
+	}
+
+	public void setPhotoStream(ByteArrayInputStream noname) {
+		this.photoStream = noname;
 	}
 
 }
