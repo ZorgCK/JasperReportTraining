@@ -173,7 +173,7 @@ public class MainView extends XdevView {
 	 * @eventHandlerDelegate Do NOT delete, used by UI designer!
 	 */
 	private void button4_buttonClick(Button.ClickEvent event) {
-		List<Employee> employeeList = new EmployeeDAO().findAll();
+		
 		
 //		StreamResource.StreamSource imagesource = new StreamSource() {
 //			@Override
@@ -187,7 +187,7 @@ public class MainView extends XdevView {
 //		
 //		image.setSource(resource);
 		
-		
+		List<Employee> employeeList = new EmployeeDAO().findAll();		
 		JRBeanCollectionDataSource data = new JRBeanCollectionDataSource(employeeList);
 
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
@@ -247,6 +247,38 @@ public class MainView extends XdevView {
 		
 	}
 
+	/**
+	 * Event handler delegate method for the {@link XdevButton}
+	 * {@link #button8}.
+	 *
+	 * @see Button.ClickListener#buttonClick(Button.ClickEvent)
+	 * @eventHandlerDelegate Do NOT delete, used by UI designer!
+	 */
+	private void button8_buttonClick(Button.ClickEvent event) {
+
+		List<Employee> employeeList = new EmployeeDAO().findAll();		
+		JRBeanCollectionDataSource data = new JRBeanCollectionDataSource(employeeList);
+
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("creator", "Christian Kümmel");
+		parameterMap.put("created", new Date());
+
+		ReportCreator report = new ReportCreator();
+		report.setDataSource(data);
+		report.setParameterMap(parameterMap);
+		report.setTemplatePath("WebContent/WEB-INF/resources/reports/Report 7 - Barcode" + ".jasper");
+
+		try {
+			browserFrame.setSource(report.getResource());
+		} catch (JRException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
 	/*
 	 * WARNING: Do NOT edit!<br>The content of this method is always regenerated
 	 * by the UI designer.
@@ -262,7 +294,6 @@ public class MainView extends XdevView {
 		this.button4 = new XdevButton();
 		this.button5 = new XdevButton();
 		this.button6 = new XdevButton();
-		this.button7 = new XdevButton();
 		this.button8 = new XdevButton();
 		this.image = new XdevImage();
 		this.browserFrame = new XdevBrowserFrame();
@@ -275,8 +306,7 @@ public class MainView extends XdevView {
 		this.button4.setCaption("Report 4 - Images");
 		this.button5.setCaption("Report 5 - Charts");
 		this.button6.setCaption("Report 6 - SubReports");
-		this.button7.setCaption("Report 7 - Invoice");
-		this.button8.setCaption("Report 8 - BarCode");
+		this.button8.setCaption("Report 7 - BarCode");
 	
 		this.button.setWidth(100, Unit.PERCENTAGE);
 		this.button.setHeight(-1, Unit.PIXELS);
@@ -302,10 +332,6 @@ public class MainView extends XdevView {
 		this.button6.setHeight(-1, Unit.PIXELS);
 		this.verticalLayout.addComponent(this.button6);
 		this.verticalLayout.setComponentAlignment(this.button6, Alignment.MIDDLE_CENTER);
-		this.button7.setWidth(100, Unit.PERCENTAGE);
-		this.button7.setHeight(-1, Unit.PIXELS);
-		this.verticalLayout.addComponent(this.button7);
-		this.verticalLayout.setComponentAlignment(this.button7, Alignment.MIDDLE_CENTER);
 		this.button8.setWidth(100, Unit.PERCENTAGE);
 		this.button8.setHeight(-1, Unit.PIXELS);
 		this.verticalLayout.addComponent(this.button8);
@@ -334,10 +360,11 @@ public class MainView extends XdevView {
 		button4.addClickListener(event -> this.button4_buttonClick(event));
 		button5.addClickListener(event -> this.button5_buttonClick(event));
 		button6.addClickListener(event -> this.button6_buttonClick(event));
+		button8.addClickListener(event -> this.button8_buttonClick(event));
 	} // </generated-code>
 
 	// <generated-code name="variables">
-	private XdevButton button, button2, button3, button4, button5, button6, button7, button8;
+	private XdevButton button, button2, button3, button4, button5, button6, button8;
 	private XdevImage image;
 	private XdevBrowserFrame browserFrame;
 	private XdevGridLayout gridLayout;

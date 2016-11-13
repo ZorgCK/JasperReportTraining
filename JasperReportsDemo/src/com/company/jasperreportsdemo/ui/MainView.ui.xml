@@ -42,11 +42,9 @@
                     <x:constraints weighty="0.0" width="100%" />
                     <x:event>click.buttonClick</x:event>
                 </XdevButton>
-                <XdevButton caption="Report 7 - Invoice" x:name="button7">
+                <XdevButton caption="Report 7 - BarCode" x:name="button8">
                     <x:constraints weighty="0.0" width="100%" />
-                </XdevButton>
-                <XdevButton caption="Report 8 - BarCode" x:name="button8">
-                    <x:constraints weighty="0.0" width="100%" />
+                    <x:event>click.buttonClick</x:event>
                 </XdevButton>
                 <XdevImage x:name="image">
                     <x:constraints weighty="0.1" width="100%" height="100%" />
