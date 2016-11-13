@@ -18,11 +18,11 @@ import com.company.jasperreportsdemo.entities.queryObjects.ProductCategorySum;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
+import com.vaadin.ui.CustomComponent;
 import com.xdev.ui.XdevBrowserFrame;
 import com.xdev.ui.XdevButton;
 import com.xdev.ui.XdevGridLayout;
 import com.xdev.ui.XdevHorizontalSplitPanel;
-import com.xdev.ui.XdevImage;
 import com.xdev.ui.XdevVerticalLayout;
 import com.xdev.ui.XdevView;
 
@@ -59,7 +59,7 @@ public class MainView extends XdevView {
 		report.setTemplatePath("WebContent/WEB-INF/resources/reports/Report 1 - Basic.jasper");
 
 		try {
-			browserFrame.setSource(report.getResource());
+			browserFrame.setSource(report.getPDFResource());
 		} catch (JRException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -91,7 +91,7 @@ public class MainView extends XdevView {
 		report.setTemplatePath("WebContent/WEB-INF/resources/reports/Report 2 - Group.jasper");
 
 		try {
-			browserFrame.setSource(report.getResource());
+			browserFrame.setSource(report.getPDFResource());
 		} catch (JRException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -123,7 +123,7 @@ public class MainView extends XdevView {
 		report.setTemplatePath("WebContent/WEB-INF/resources/reports/Report 3 - Crosstab" + ".jasper");
 
 		try {
-			browserFrame.setSource(report.getResource());
+			browserFrame.setSource(report.getPDFResource());
 		} catch (JRException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -155,7 +155,7 @@ public class MainView extends XdevView {
 		report.setTemplatePath("WebContent/WEB-INF/resources/reports/Report 5 - Charts" + ".jasper");
 
 		try {
-			browserFrame.setSource(report.getResource());
+			browserFrame.setSource(report.getPDFResource());
 		} catch (JRException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -200,7 +200,7 @@ public class MainView extends XdevView {
 		report.setTemplatePath("WebContent/WEB-INF/resources/reports/Report 4 - Images" + ".jasper");
 
 		try {
-			browserFrame.setSource(report.getResource());
+			browserFrame.setSource(report.getPDFResource());
 		} catch (JRException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -235,7 +235,7 @@ public class MainView extends XdevView {
 		report.setTemplatePath("WebContent/WEB-INF/resources/reports/Report 6 - Master" + ".jasper");
 
 		try {
-			browserFrame.setSource(report.getResource());
+			browserFrame.setSource(report.getPDFResource());
 		} catch (JRException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -269,7 +269,7 @@ public class MainView extends XdevView {
 		report.setTemplatePath("WebContent/WEB-INF/resources/reports/Report 7 - Barcode" + ".jasper");
 
 		try {
-			browserFrame.setSource(report.getResource());
+			browserFrame.setSource(report.getPDFResource());
 		} catch (JRException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -277,6 +277,17 @@ public class MainView extends XdevView {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * Event handler delegate method for the {@link XdevButton}
+	 * {@link #button7}.
+	 *
+	 * @see Button.ClickListener#buttonClick(Button.ClickEvent)
+	 * @eventHandlerDelegate Do NOT delete, used by UI designer!
+	 */
+	private void button7_buttonClick(Button.ClickEvent event) {
+	
 	}
 
 	/*
@@ -295,7 +306,9 @@ public class MainView extends XdevView {
 		this.button5 = new XdevButton();
 		this.button6 = new XdevButton();
 		this.button8 = new XdevButton();
-		this.image = new XdevImage();
+		this.button7 = new XdevButton();
+		this.button9 = new XdevButton();
+		this.button10 = new XdevButton();
 		this.browserFrame = new XdevBrowserFrame();
 	
 		this.horizontalSplitPanel.setSplitPosition(30.0F, Unit.PERCENTAGE);
@@ -307,6 +320,9 @@ public class MainView extends XdevView {
 		this.button5.setCaption("Report 5 - Charts");
 		this.button6.setCaption("Report 6 - SubReports");
 		this.button8.setCaption("Report 7 - BarCode");
+		this.button7.setCaption("Report 1 - Basic als HTML");
+		this.button9.setCaption("Report 1 - Basic");
+		this.button10.setCaption("Report 1 - Basic");
 	
 		this.button.setWidth(100, Unit.PERCENTAGE);
 		this.button.setHeight(-1, Unit.PIXELS);
@@ -336,10 +352,19 @@ public class MainView extends XdevView {
 		this.button8.setHeight(-1, Unit.PIXELS);
 		this.verticalLayout.addComponent(this.button8);
 		this.verticalLayout.setComponentAlignment(this.button8, Alignment.MIDDLE_CENTER);
-		this.image.setSizeFull();
-		this.verticalLayout.addComponent(this.image);
-		this.verticalLayout.setComponentAlignment(this.image, Alignment.MIDDLE_CENTER);
-		this.verticalLayout.setExpandRatio(this.image, 10.0F);
+		this.button7.setSizeUndefined();
+		this.verticalLayout.addComponent(this.button7);
+		this.verticalLayout.setComponentAlignment(this.button7, Alignment.MIDDLE_CENTER);
+		this.button9.setSizeUndefined();
+		this.verticalLayout.addComponent(this.button9);
+		this.verticalLayout.setComponentAlignment(this.button9, Alignment.MIDDLE_CENTER);
+		this.button10.setSizeUndefined();
+		this.verticalLayout.addComponent(this.button10);
+		this.verticalLayout.setComponentAlignment(this.button10, Alignment.MIDDLE_CENTER);
+		CustomComponent verticalLayout_spacer = new CustomComponent();
+		verticalLayout_spacer.setSizeFull();
+		this.verticalLayout.addComponent(verticalLayout_spacer);
+		this.verticalLayout.setExpandRatio(verticalLayout_spacer, 1.0F);
 		this.verticalLayout.setSizeFull();
 		this.horizontalSplitPanel.setFirstComponent(this.verticalLayout);
 		this.browserFrame.setSizeFull();
@@ -361,11 +386,11 @@ public class MainView extends XdevView {
 		button5.addClickListener(event -> this.button5_buttonClick(event));
 		button6.addClickListener(event -> this.button6_buttonClick(event));
 		button8.addClickListener(event -> this.button8_buttonClick(event));
+		button7.addClickListener(event -> this.button7_buttonClick(event));
 	} // </generated-code>
 
 	// <generated-code name="variables">
-	private XdevButton button, button2, button3, button4, button5, button6, button8;
-	private XdevImage image;
+	private XdevButton button, button2, button3, button4, button5, button6, button8, button7, button9, button10;
 	private XdevBrowserFrame browserFrame;
 	private XdevGridLayout gridLayout;
 	private XdevVerticalLayout verticalLayout;

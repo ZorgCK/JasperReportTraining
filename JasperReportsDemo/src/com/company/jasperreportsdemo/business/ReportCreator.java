@@ -18,6 +18,9 @@ import com.vaadin.server.StreamResource.StreamSource;
 import com.xdev.res.ApplicationResource;
 
 import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.JasperRunManager;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
@@ -57,7 +60,7 @@ public class ReportCreator {
 		this.parameterMap = parameterMap;
 	}
 
-	private StreamResource loadAndFillReport() throws JRException, IOException {
+	private StreamResource loadAndFillPDFReport() throws JRException, IOException {
 		JasperReport report = (JasperReport) JRLoader.loadObject(
 				new ApplicationResource(this.getClass(), this.getTemplatePath())
 						.getStream().getStream());
@@ -68,7 +71,6 @@ public class ReportCreator {
 				byte[] b = null;
 
 				try {
-
 					b = JasperRunManager.runReportToPdf(report, parameterMap, dataSource);
 				} catch (JRException ex) {
 					System.out.println(ex);
@@ -86,13 +88,44 @@ public class ReportCreator {
 
 	}
 
+	private StreamResource loadAndFillHTMLReport() throws JRException, IOException {
+		JasperReport report = (JasperReport) JRLoader.loadObject(
+				new ApplicationResource(this.getClass(), this.getTemplatePath())
+						.getStream().getStream());
+
+		JasperPrint print = JasperFillManager.fillReport(report, parameterMap, dataSource);
+		JasperExportManager.exportReportToHtmlFile(print, getTempPath() + File.separator + "HTMLReport.html");
+		
+//		StreamResource.StreamSource source = new StreamSource() {
+//			@Override
+//			public InputStream getStream() {
+//				byte[] b = null;
+//
+//				try {
+//					b = JasperRunManager.runReportToPdf(report, parameterMap, dataSource);
+//				} catch (JRException ex) {
+//					System.out.println(ex);
+//					logger.info("Logger:" + ex.getMessage());
+//				}
+//
+//				return new ByteArrayInputStream(b);
+//			}
+//		};
+//
+//		this.resource = new StreamResource(source,
+//				getTempPath() + File.separator + "myreport_" + System.currentTimeMillis() + ".pdf");
+//		this.resource.setMIMEType("application/pdf");
+		return resource;
+
+	}
 	public static String getTempPath() throws IOException {
 		Path tempDir = Files.createDirectories(Paths.get(CLOUD_MANAGER_WAR_UPLOAD_FILE_DIRECTORY));
 		return tempDir.toAbsolutePath().toString();
 	}
 
-	public StreamResource getResource() throws JRException, IOException {
-
-		return loadAndFillReport();
+	public StreamResource getPDFResource() throws JRException, IOException {
+		return loadAndFillPDFReport();
 	}
+	
+	
 }
