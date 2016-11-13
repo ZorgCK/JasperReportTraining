@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
+<!-- 2016-11-13T10:50:12 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Report 5 - Charts" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="d7e90f75-a469-49c7-9d23-0d5ed4873259">
+	<parameter name="creator" class="java.lang.String"/>
+	<parameter name="created" class="java.util.Date"/>
+	<field name="priceOerCategory" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[priceOerCategory]]></fieldDescription>
+	</field>
+	<field name="category" class="com.company.jasperreportsdemo.entities.Category">
+		<fieldDescription><![CDATA[category]]></fieldDescription>
+	</field>
+	<title>
+		<band height="80" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<staticText>
+				<reportElement x="0" y="10" width="259" height="49" uuid="583eaabb-a00d-4aec-838a-0284890f3f27"/>
+				<textElement verticalAlignment="Middle">
+					<font size="29"/>
+				</textElement>
+				<text><![CDATA[Übung 5 - Charts]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="360" y="10" width="184" height="20" uuid="6ffa9c3c-32a7-487d-a33d-a312f4c0b0bb"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Erstellt von: " + $P{creator}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="360" y="30" width="184" height="20" uuid="cda04f42-c4cc-4cbe-9ba2-40350e68db50"/>
+				<box topPadding="2" leftPadding="2" bottomPadding="2" rightPadding="2"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA["Erstellt am: " + $P{created}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<summary>
+		<band height="680">
+			<barChart>
+				<chart evaluationTime="Report">
+					<reportElement isPrintRepeatedValues="false" x="27" y="20" width="500" height="320" uuid="0afb8afe-b571-4a49-b836-8730951c914e"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA["SERIES 1"]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{category}.getCategoryname()]]></categoryExpression>
+						<valueExpression><![CDATA[$F{priceOerCategory}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<barPlot>
+					<plot backcolor="#FFFFFF" labelRotation="50.0">
+						<seriesColor seriesOrder="0" color="#B4ED9B"/>
+					</plot>
+					<itemLabel/>
+					<categoryAxisFormat labelRotation="50.0">
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000">
+							<tickLabelFont>
+								<font fontName="SansSerif"/>
+							</tickLabelFont>
+						</axisFormat>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat labelColor="#000000" tickLabelColor="#000000" axisLineColor="#000000">
+							<labelFont>
+								<font size="9"/>
+							</labelFont>
+						</axisFormat>
+					</valueAxisFormat>
+				</barPlot>
+			</barChart>
+			<pieChart>
+				<chart evaluationTime="Report">
+					<reportElement x="27" y="350" width="500" height="330" uuid="ce2dc500-b0d7-4222-bc5d-6104aa5f90e0"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<pieDataset>
+					<keyExpression><![CDATA[$F{category}.getCategoryname()]]></keyExpression>
+					<valueExpression><![CDATA[$F{priceOerCategory}]]></valueExpression>
+					<labelExpression><![CDATA[$F{category}.getCategoryname()]]></labelExpression>
+				</pieDataset>
+				<piePlot>
+					<plot>
+						<seriesColor seriesOrder="0" color="#072886"/>
+						<seriesColor seriesOrder="1" color="#603476"/>
+						<seriesColor seriesOrder="2" color="#63E489"/>
+						<seriesColor seriesOrder="3" color="#38FEDA"/>
+						<seriesColor seriesOrder="4" color="#A5BCF1"/>
+						<seriesColor seriesOrder="5" color="#43017C"/>
+						<seriesColor seriesOrder="6" color="#62D875"/>
+						<seriesColor seriesOrder="7" color="#73EDDD"/>
+						<seriesColor seriesOrder="8" color="#8480F3"/>
+					</plot>
+					<itemLabel/>
+				</piePlot>
+			</pieChart>
+		</band>
+	</summary>
+</jasperReport>

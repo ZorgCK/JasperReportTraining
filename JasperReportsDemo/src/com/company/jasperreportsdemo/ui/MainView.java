@@ -14,6 +14,7 @@ import com.company.jasperreportsdemo.dal.ProductDAO;
 import com.company.jasperreportsdemo.entities.Employee;
 import com.company.jasperreportsdemo.entities.Orderdetail;
 import com.company.jasperreportsdemo.entities.Product;
+import com.company.jasperreportsdemo.entities.queryObjects.ProductCategorySum;
 import com.vaadin.shared.ui.MarginInfo;
 import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
@@ -29,7 +30,7 @@ import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 public class MainView extends XdevView {
-	
+
 	/**
 	 * 
 	 */
@@ -47,16 +48,16 @@ public class MainView extends XdevView {
 	private void button_buttonClick(Button.ClickEvent event) {
 		List<Employee> employeeList = new EmployeeDAO().findAll();
 		JRBeanCollectionDataSource data = new JRBeanCollectionDataSource(employeeList);
-		
+
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		parameterMap.put("creator", "Christian Kümmel");
 		parameterMap.put("created", new Date());
-		
+
 		ReportCreator report = new ReportCreator();
 		report.setDataSource(data);
 		report.setParameterMap(parameterMap);
 		report.setTemplatePath("WebContent/WEB-INF/resources/reports/Report 1 - Basic.jasper");
-		
+
 		try {
 			browserFrame.setSource(report.getResource());
 		} catch (JRException e) {
@@ -79,16 +80,16 @@ public class MainView extends XdevView {
 		List<Product> productList = new ProductDAO().getProductsOrderedByCategory();
 
 		JRBeanCollectionDataSource data = new JRBeanCollectionDataSource(productList);
-		
+
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		parameterMap.put("creator", "Christian Kümmel");
 		parameterMap.put("created", new Date());
-		
+
 		ReportCreator report = new ReportCreator();
 		report.setDataSource(data);
 		report.setParameterMap(parameterMap);
 		report.setTemplatePath("WebContent/WEB-INF/resources/reports/Report 2 - Group.jasper");
-		
+
 		try {
 			browserFrame.setSource(report.getResource());
 		} catch (JRException e) {
@@ -111,17 +112,48 @@ public class MainView extends XdevView {
 		List<Orderdetail> orderDetailList = new OrderdetailDAO().findAll();
 
 		JRBeanCollectionDataSource data = new JRBeanCollectionDataSource(orderDetailList);
-		
+
 		Map<String, Object> parameterMap = new HashMap<String, Object>();
 		parameterMap.put("creator", "Christian Kümmel");
 		parameterMap.put("created", new Date());
-		
+
 		ReportCreator report = new ReportCreator();
 		report.setDataSource(data);
 		report.setParameterMap(parameterMap);
-		report.setTemplatePath("WebContent/WEB-INF/resources/reports/Report 3 - Crosstab"
-				+ ".jasper");
-		
+		report.setTemplatePath("WebContent/WEB-INF/resources/reports/Report 3 - Crosstab" + ".jasper");
+
+		try {
+			browserFrame.setSource(report.getResource());
+		} catch (JRException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Event handler delegate method for the {@link XdevButton}
+	 * {@link #button5}.
+	 *
+	 * @see Button.ClickListener#buttonClick(Button.ClickEvent)
+	 * @eventHandlerDelegate Do NOT delete, used by UI designer!
+	 */
+	private void button5_buttonClick(Button.ClickEvent event) {
+		List<ProductCategorySum> productsForChart = new ProductDAO().getProductsForChart();
+
+		JRBeanCollectionDataSource data = new JRBeanCollectionDataSource(productsForChart);
+
+		Map<String, Object> parameterMap = new HashMap<String, Object>();
+		parameterMap.put("creator", "Christian Kümmel");
+		parameterMap.put("created", new Date());
+
+		ReportCreator report = new ReportCreator();
+		report.setDataSource(data);
+		report.setParameterMap(parameterMap);
+		report.setTemplatePath("WebContent/WEB-INF/resources/reports/Report 5 - Charts" + ".jasper");
+
 		try {
 			browserFrame.setSource(report.getResource());
 		} catch (JRException e) {
@@ -151,7 +183,7 @@ public class MainView extends XdevView {
 		this.button7 = new XdevButton();
 		this.button8 = new XdevButton();
 		this.browserFrame = new XdevBrowserFrame();
-	
+
 		this.horizontalSplitPanel.setSplitPosition(30.0F, Unit.PERCENTAGE);
 		this.verticalLayout.setMargin(new MarginInfo(false, true, false, false));
 		this.button.setCaption("Report 1 - Basic");
@@ -162,7 +194,7 @@ public class MainView extends XdevView {
 		this.button6.setCaption("Report 6 - SubReports");
 		this.button7.setCaption("Report 7 - Invoice");
 		this.button8.setCaption("Report 8 - BarCode");
-	
+
 		this.button.setWidth(100, Unit.PERCENTAGE);
 		this.button.setHeight(-1, Unit.PIXELS);
 		this.verticalLayout.addComponent(this.button);
@@ -212,10 +244,11 @@ public class MainView extends XdevView {
 		this.gridLayout.setSizeFull();
 		this.setContent(this.gridLayout);
 		this.setSizeFull();
-	
+
 		button.addClickListener(event -> this.button_buttonClick(event));
 		button2.addClickListener(event -> this.button2_buttonClick(event));
 		button3.addClickListener(event -> this.button3_buttonClick(event));
+		button5.addClickListener(event -> this.button5_buttonClick(event));
 	} // </generated-code>
 
 	// <generated-code name="variables">

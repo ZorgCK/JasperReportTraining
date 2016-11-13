@@ -9,7 +9,10 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
+import com.company.jasperreportsdemo.entities.Category_;
 import com.company.jasperreportsdemo.entities.Product;
+import com.company.jasperreportsdemo.entities.Product_;
+import com.company.jasperreportsdemo.entities.queryObjects.ProductCategorySum;
 import com.xdev.dal.JPADAO;
 
 /**
@@ -34,9 +37,27 @@ public class ProductDAO extends JPADAO<Product, Integer> {
 	
 		Root<Product> root = criteriaQuery.from(Product.class);
 	
-		criteriaQuery.orderBy(criteriaBuilder.asc(root.get("category").get("categoryid")));
+		criteriaQuery.orderBy(criteriaBuilder.asc(root.get(Product_.category).get(Category_.categoryid)));
 	
 		TypedQuery<Product> query = entityManager.createQuery(criteriaQuery);
+		return query.getResultList();
+	}
+	
+	
+	public List<ProductCategorySum> getProductsForChart() {
+		EntityManager entityManager = em();
+	
+		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
+	
+		CriteriaQuery<ProductCategorySum> criteriaQuery = criteriaBuilder.createQuery(ProductCategorySum.class);
+	
+		Root<Product> root = criteriaQuery.from(Product.class);
+	
+		criteriaQuery.multiselect(criteriaBuilder.sum(root.get(Product_.unitprice)), root.get(Product_.category));
+	
+		criteriaQuery.groupBy(root.get(Product_.category));
+	
+		TypedQuery<ProductCategorySum> query = entityManager.createQuery(criteriaQuery);
 		return query.getResultList();
 	}
 }
